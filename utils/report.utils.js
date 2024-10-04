@@ -4,9 +4,9 @@ const reportStatus = (status) => {
   console.log("=== Trading Bot Status ===");
   console.log(`Current Balance: $${balance}`);
   console.log(`Stock Owned: ${stockOwned ? "Yes" : "No"}`);
-  
+
   if (stockOwned) {
-      console.log(`Price at Purchase: $${stockPriceAtBuy}`);
+    console.log(`Price at Purchase: $${stockPriceAtBuy}`);
   }
 
   console.log("===========================");

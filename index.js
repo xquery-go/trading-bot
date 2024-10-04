@@ -20,7 +20,7 @@ import startMonitoring from "./bot.js";
 // define versioning routes
 app.use("/app/v1", appRoutes);
 
-// const interval = setInterval(startMonitoring, 1000);
+const interval = setInterval(startMonitoring, 1000);
 
 // error middleware
 app.use(ErrorMiddleware);

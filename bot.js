@@ -1,6 +1,7 @@
 import TradingBot from "./services/tradingBot.service.js";
 import fetchStockPrice from "./utils/fetchStockPrice.js";
 import reportStatus from "./utils/report.utils.js";
+import reportSummary from "./utils/reportSummary.utils.js";
 
 const bot = new TradingBot();
 
@@ -15,8 +16,11 @@ const startMonitoring = async () => {
 
     // Log or report the bot's status
     const status = bot.getStatus();
-    console.log("Current Status:", status);
-    reportStatus(status); // Use the reportStatus function if you have one
+    reportStatus(status); // Call reportStatus to log the current status
+
+    // Generate and log the summary report
+    const summary = bot.getSummary();
+    reportSummary(summary); // Call reportSummary to log trade details
   } catch (error) {
     console.error("Error in monitoring:", error.message);
   }
