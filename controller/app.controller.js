@@ -1,4 +1,4 @@
-import getStockPrice from "../utils/mockStockPrice.utils.js";
+import getStockPrice from "../utils/stockPrice.utils.js";
 
 export const stockPrice = async (req, res, next) => {
   try {
