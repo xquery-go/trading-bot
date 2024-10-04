@@ -16,11 +16,13 @@ const startMonitoring = async () => {
 
     // Log or report the bot's status
     const status = bot.getStatus();
-    reportStatus(status); // Call reportStatus to log the current status
+    // Call reportStatus to log the current status
+    reportStatus(status);
 
     // Generate and log the summary report
     const summary = bot.getSummary();
-    reportSummary(summary); // Call reportSummary to log trade details
+    // Call reportSummary to log trade details
+    reportSummary(summary);
   } catch (error) {
     console.error("Error in monitoring:", error.message);
   }
