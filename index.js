@@ -12,5 +12,11 @@ app.listen(PORT, () => {
 // define routes
 
 import appRoutes from "./routes/app.routes.js";
+import ErrorMiddleware from "./middlewares/error.middleware.js";
+import startMonitering from "./bot.js";
 // define versioning routes
 app.use("/app/v1", appRoutes);
+
+startMonitering();
+// error middleware
+app.use(ErrorMiddleware)
