@@ -10,7 +10,7 @@ class TradingBot {
   #stockPriceAtBuy;
 
   constructor(initialBalance = INITIAL_BALANCE) {
-    this.#balance = initialBalance;
+    this.#balance = Number(initialBalance) || 0;
     this.#stockOwned = false;
     this.#stockPriceAtBuy = 0;
   }
@@ -46,14 +46,17 @@ class TradingBot {
       return;
     }
     const profit = price - this.#stockPriceAtBuy;
-    this.#balance += profit;
+
+    // Ensure balance is updated with a valid number
+    this.#balance = (Number(this.#balance) + Number(profit)).toFixed(2);
     this.#stockOwned = false;
     this.#log(
-      `Sold stock at $${price}. Profit: $${profit.toFixed(
-        2
-      )}. Balance: $${this.#balance.toFixed(2)}`
+      `Sold stock at $${price}. Profit: $${profit.toFixed(2)}. Balance: $${
+        this.#balance
+      }`
     );
   }
+
   evaluateTrade(currentPrice) {
     if (this.#canBuy(currentPrice)) {
       this.buy(currentPrice);
@@ -71,3 +74,5 @@ class TradingBot {
     };
   }
 }
+
+export default TradingBot;
