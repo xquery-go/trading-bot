@@ -12,22 +12,33 @@ class TradingBot {
   constructor(initialBalance = INITIAL_BALANCE) {
     this.#balance = Number(initialBalance) || 0;
     this.#stockOwned = false;
-    this.#stockPriceAtBuy = 0;
+    this.#stockPriceAtBuy = 100; // Initialize stock price at some value (or mock last known price)
   }
 
   #log(message) {
     console.log(message);
   }
+
+  // Check if the price has dropped by 2% or more
   #canBuy(currentPrice) {
-    return (
-      !this.#stockOwned && currentPrice < this.#stockPriceAtBuy * BUY_THRESHOLD
-    );
+    if (this.#stockOwned) {
+      return false; // Can't buy if already holding stock
+    }
+    // Calculate the percentage drop (stockPriceAtBuy is 100 by default, or you can mock a starting price)
+    const dropPercentage =
+      ((this.#stockPriceAtBuy - currentPrice) / this.#stockPriceAtBuy) * 100;
+    return dropPercentage >= 2; // Buy if the price has dropped by 2%
   }
 
+  // Check if the price has risen by 3% or more
   #canSell(currentPrice) {
-    return (
-      this.#stockOwned && currentPrice > this.#stockPriceAtBuy * SELL_THRESHOLD
-    );
+    if (!this.#stockOwned) {
+      return false; // Can't sell if no stock is owned
+    }
+    // Calculate the percentage rise
+    const risePercentage =
+      ((currentPrice - this.#stockPriceAtBuy) / this.#stockPriceAtBuy) * 100;
+    return risePercentage >= 3; // Sell if the price has risen by 3%
   }
 
   buy(price) {
@@ -66,9 +77,10 @@ class TradingBot {
       this.#log("No action taken.");
     }
   }
+
   getStatus() {
     return {
-      balance: this.#balance.toFixed(2),
+      balance: Number(this.#balance).toFixed(2),
       stockOwned: this.#stockOwned,
       stockPriceAtBuy: this.#stockPriceAtBuy,
     };

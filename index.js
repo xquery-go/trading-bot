@@ -15,11 +15,12 @@ app.listen(PORT, () => {
 
 import appRoutes from "./routes/app.routes.js";
 import ErrorMiddleware from "./middlewares/error.middleware.js";
-import startMonitering from "./bot.js";
+import startMonitoring from "./bot.js";
+
 // define versioning routes
 app.use("/app/v1", appRoutes);
 
-const interval = setInterval(startMonitering, 1000);
+// const interval = setInterval(startMonitoring, 1000);
 
 // error middleware
 app.use(ErrorMiddleware);
