@@ -1,7 +1,8 @@
+import getStockPrice from "../utils/mockStockPrice.utils.js";
+
 export const stockPrice = async (req, res, next) => {
   try {
-    const price = getMockStockPrice();
-    console.log(price);
+    const price = getStockPrice();
     // return response
     return res.status(200).json({
       success: true,
